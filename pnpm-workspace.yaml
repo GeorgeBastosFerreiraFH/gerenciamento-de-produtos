@@ -1,5 +1,10 @@
+packages:
+  - "client"
+  - "server"
+
 allowBuilds:
   sharp: true
+
 minimumReleaseAgeExclude:
   - framer-motion@12.39.0
   - motion-dom@12.39.0

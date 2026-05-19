@@ -59,7 +59,9 @@ export default function Login() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
           className="text-center relative z-10"
+          
         >
+          
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}

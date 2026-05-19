@@ -1,13 +1,15 @@
 import { NavLink } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { LayoutDashboard, Package, LogOut, X } from 'lucide-react'
+import { LayoutDashboard, Package, HardHat, LogOut, X } from 'lucide-react'
 import { useAuthStore } from '../store/authStore'
 import { useNavigate } from 'react-router-dom'
 import clsx from 'clsx'
 
 const navItems = [
   { to: '/', icon: LayoutDashboard, label: 'Dashboard' },
-  { to: '/products', icon: Package, label: 'Produtos' },
+  { to: '/obras', icon: HardHat, label: 'Obras' },
+  { to: '/products', icon: Package, label: 'Estoque' },
+  
 ]
 
 export default function Sidebar({ isOpen, onClose }) {

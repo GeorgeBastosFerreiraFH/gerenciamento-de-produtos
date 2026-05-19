@@ -15,9 +15,8 @@ const API_URL =
 const api = axios.create({
   baseURL: `${API_URL}/api`,
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   },
-  withCredentials: true
 })
 
 // ========================================
@@ -34,6 +33,7 @@ api.interceptors.request.use(
 
     return config
   },
+
   (error) => {
     return Promise.reject(error)
   }
@@ -49,21 +49,37 @@ api.interceptors.response.use(
   (error) => {
     const status = error.response?.status
 
-    // Token expirado ou inválido
+    // ========================================
+    // TOKEN EXPIRADO OU INVÁLIDO
+    // ========================================
+
     if (status === 401) {
       const { logout } = useAuthStore.getState()
 
       logout()
 
-      // Evita loop infinito
       if (window.location.pathname !== '/login') {
         window.location.href = '/login'
       }
     }
 
-    // Backend offline
+    // ========================================
+    // BACKEND OFFLINE
+    // ========================================
+
     if (error.code === 'ERR_NETWORK') {
       console.error('Servidor offline ou inacessível')
+    }
+
+    // ========================================
+    // CORS / NETWORK ERROR
+    // ========================================
+
+    if (
+      error.message?.includes('Network Error') ||
+      error.message?.includes('CORS')
+    ) {
+      console.error('Erro de conexão com a API')
     }
 
     return Promise.reject(error)
